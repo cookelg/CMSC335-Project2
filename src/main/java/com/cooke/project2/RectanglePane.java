@@ -1,9 +1,18 @@
+/*
+ * File name: RectanglePane.java
+ * Date:
+ * Author: Lawrence Cooke
+ * Purpose:
+ */
+
 package com.cooke.project2;
 
 import javafx.scene.Group;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.shape.Rectangle;
 
 public class RectanglePane extends FieldPane {
@@ -34,17 +43,34 @@ public class RectanglePane extends FieldPane {
             return null;
         }));
         btDraw.setOnAction(event -> {
-            double width = Double.parseDouble(tfWidth.getText());
-            double height = Double.parseDouble(tfHeight.getText());
-            String color = cboColors.getValue();
-            Rectangle r = new Rectangle(width, height);
+            try {
+                double width = Double.parseDouble(tfWidth.getText());
+                double height = Double.parseDouble(tfHeight.getText());
+                if (Double.isInfinite(width) || Double.isNaN(width) || Double.isInfinite(height)
+                        || Double.isNaN(height))
+                    throw new IllegalArgumentException("Inputs are out of range");
+                if (width == 0 || height == 0)
+                    throw new IllegalArgumentException("Inputs cannot be 0");
+                String color = cboColors.getValue();
+                Rectangle r = new Rectangle(width, height);
 
-            if (color != null) {
-                r.setFill(colorFactories.get(color).get());
+                if (color != null) {
+                    r.setFill(colorFactories.get(color).get());
+                }
+
+                group.getChildren().clear();
+                group.getChildren().add(r);
+            } catch (NumberFormatException e) {
+                tfHeight.clear();
+                tfWidth.clear();
+                Alert alert = new Alert(AlertType.ERROR, "Invalid Inputs");
+                alert.showAndWait();
+            } catch (IllegalArgumentException e) {
+                tfHeight.clear();
+                tfWidth.clear();
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
             }
-
-            group.getChildren().clear();
-            group.getChildren().add(r);
         });
     }
 

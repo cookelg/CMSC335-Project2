@@ -1,9 +1,18 @@
+/*
+ * File name: EqualTriPane.java
+ * Date:
+ * Author: Lawrence Cooke
+ * Purpose:
+ */
+
 package com.cooke.project2;
 
 import javafx.scene.Group;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.control.Alert.AlertType;
 
 public class EqualTriPane extends FieldPane {
     private TextField tfSide = new TextField();
@@ -24,17 +33,31 @@ public class EqualTriPane extends FieldPane {
         }));
 
         btDraw.setOnAction(event -> {
-            double side = Double.parseDouble(tfSide.getText());
-            String color = cboColors.getValue();
-            Triangle t = new Triangle();
+            try {
+                double side = Double.parseDouble(tfSide.getText());
+                if (Double.isInfinite(side) || Double.isNaN(side))
+                    throw new IllegalArgumentException("Inputs are out of range");
+                if (side == 0)
+                    throw new IllegalArgumentException("Inputs cannot be zero");
+                String color = cboColors.getValue();
+                Triangle t = new Triangle();
 
-            if (color != null) {
-                t.setFill(colorFactories.get(color).get());
+                if (color != null) {
+                    t.setFill(colorFactories.get(color).get());
+                }
+
+                t.setEquilateral(side);
+                group.getChildren().clear();
+                group.getChildren().add(t);
+            } catch (NumberFormatException e) {
+                tfSide.clear();
+                Alert alert = new Alert(AlertType.ERROR, "Invalid Inputs");
+                alert.showAndWait();
+            } catch (IllegalArgumentException e) {
+                tfSide.clear();
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
             }
-
-            t.setEquilateral(side);
-            group.getChildren().clear();
-            group.getChildren().add(t);
         });
     }
 

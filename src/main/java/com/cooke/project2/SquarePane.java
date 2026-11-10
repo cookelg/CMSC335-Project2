@@ -1,9 +1,18 @@
+/*
+ * File name: SquarePane.java
+ * Date:
+ * Author: Lawrence Cooke
+ * Purpose:
+ */
+
 package com.cooke.project2;
 
 import javafx.scene.Group;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.shape.Rectangle;
 
 public class SquarePane extends FieldPane {
@@ -25,17 +34,31 @@ public class SquarePane extends FieldPane {
         }));
 
         btDraw.setOnAction(event -> {
-            double side = Double.parseDouble(tfSide.getText());
-            String color = cboColors.getValue();
+            try {
+                double side = Double.parseDouble(tfSide.getText());
+                if (Double.isInfinite(side) || Double.isNaN(side))
+                    throw new IllegalArgumentException("Inputs are out of range");
+                if (side == 0)
+                    throw new IllegalArgumentException("Inputs cannot be zero");
+                String color = cboColors.getValue();
 
-            Rectangle s = new Rectangle(side, side);
+                Rectangle s = new Rectangle(side, side);
 
-            if (color != null) {
-                s.setFill(colorFactories.get(color).get());
+                if (color != null) {
+                    s.setFill(colorFactories.get(color).get());
+                }
+
+                group.getChildren().clear();
+                group.getChildren().add(s);
+            } catch (NumberFormatException e) {
+                tfSide.clear();
+                Alert alert = new Alert(AlertType.ERROR, "Invalid Inputs");
+                alert.showAndWait();
+            } catch (IllegalArgumentException e) {
+                tfSide.clear();
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
             }
-
-            group.getChildren().clear();
-            group.getChildren().add(s);
         });
     }
 

@@ -1,3 +1,10 @@
+/*
+ * File name: App.java
+ * Date:
+ * Author: Lawrence Cooke
+ * Purpose:
+ */
+
 package com.cooke.project2;
 
 import java.util.LinkedHashMap;
@@ -49,6 +56,8 @@ public class App extends Application {
         fieldFactories.put("Sphere", () -> new SpherePane());
         fieldFactories.put("Cube", () -> new CubePane());
         fieldFactories.put("Cylinder", () -> new CylinderPane());
+        fieldFactories.put("Cone", () -> new ConePane());
+        fieldFactories.put("Torus", () -> new TorusPane());
 
         cboShapes.getItems().addAll(fieldFactories.keySet());
         cboShapes.setPromptText("Choose a shape");
@@ -87,12 +96,6 @@ public class App extends Application {
         borderPane.setLeft(bp2);
         borderPane.setRight(shapeDisplayPane);
 
-        // cboShapes.valueProperty().addListener((obs, oldVal, newVal) -> {
-        // group.getChildren().clear();
-        // if (newVal != null) {
-        // group.getChildren().add(shapeFactories.get(newVal).get());
-        // }
-        // });
         cboShapes.valueProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
                 FieldPane p = fieldFactories.get(newVal).get();
@@ -139,23 +142,4 @@ public class App extends Application {
         });
 
     }
-
-    // class Group3D extends Group {
-    // Rotate r;
-    // Transform t = new Rotate();
-    //
-    // void rotateByX(int angle) {
-    // r = new Rotate(angle, Rotate.X_AXIS);
-    // t = t.createConcatenation(r);
-    // this.getTransforms().clear();
-    // this.getTransforms().addAll(t);
-    // }
-    //
-    // void rotateByY(int angle) {
-    // r = new Rotate(angle, Rotate.Y_AXIS);
-    // t = t.createConcatenation(r);
-    // this.getTransforms().clear();
-    // this.getTransforms().addAll(t);
-    // }
-    // }
 }

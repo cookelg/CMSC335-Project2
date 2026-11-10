@@ -1,9 +1,18 @@
+/*
+ * File name: CirclePane.java
+ * Date:
+ * Author: Lawrence Cooke
+ * Purpose:
+ */
+
 package com.cooke.project2;
 
 import javafx.scene.Group;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.shape.Circle;
 
 public class CirclePane extends FieldPane {
@@ -25,17 +34,31 @@ public class CirclePane extends FieldPane {
         }));
 
         btDraw.setOnAction(event -> {
-            double radius = Double.parseDouble(tfRadius.getText());
-            String color = cboColors.getValue();
+            try {
+                double radius = Double.parseDouble(tfRadius.getText());
+                if (Double.isInfinite(radius) || Double.isNaN(radius))
+                    throw new IllegalArgumentException("Inputs are out of range");
+                if (radius == 0)
+                    throw new IllegalArgumentException("Inputs cannot be zero");
+                String color = cboColors.getValue();
 
-            Circle c = new Circle(radius);
+                Circle c = new Circle(radius);
 
-            if (color != null) {
-                c.setFill(colorFactories.get(color).get());
+                if (color != null) {
+                    c.setFill(colorFactories.get(color).get());
+                }
+
+                group.getChildren().clear();
+                group.getChildren().add(c);
+            } catch (NumberFormatException e) {
+                tfRadius.clear();
+                Alert alert = new Alert(AlertType.ERROR, "Invalid Inputs");
+                alert.showAndWait();
+            } catch (IllegalArgumentException e) {
+                tfRadius.clear();
+                Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+                alert.showAndWait();
             }
-
-            group.getChildren().clear();
-            group.getChildren().add(c);
         });
     }
 

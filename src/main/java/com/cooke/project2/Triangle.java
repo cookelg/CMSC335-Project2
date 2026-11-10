@@ -1,3 +1,10 @@
+/*
+ * File name: Triangle.java
+ * Date:
+ * Author: Lawrence Cooke
+ * Purpose:
+ */
+
 package com.cooke.project2;
 
 import javafx.scene.shape.Polygon;

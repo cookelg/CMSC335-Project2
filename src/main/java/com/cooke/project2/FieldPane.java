@@ -1,3 +1,10 @@
+/*
+ * File name: FieldPane.java
+ * Date:
+ * Author: Lawrence Cooke
+ * Purpose:
+ */
+
 package com.cooke.project2;
 
 import java.util.LinkedHashMap;
