@@ -20,14 +20,14 @@ public class RightTriPane extends FieldPane {
     @Override
     public void initializeDrawButton(Group group) {
         tfSide1.setTextFormatter(new TextFormatter<String>(change -> {
-            if (change.getControlNewText().matches("-?\\d*(\\.\\d*)?")) {
+            if (change.getControlNewText().matches("\\d*(\\.\\d*)?")) {
                 return change;
             }
             return null;
         }));
 
         tfSide2.setTextFormatter(new TextFormatter<String>(change -> {
-            if (change.getControlNewText().matches("-?\\d*(\\.\\d*)?")) {
+            if (change.getControlNewText().matches("\\d*(\\.\\d*)?")) {
                 return change;
             }
             return null;

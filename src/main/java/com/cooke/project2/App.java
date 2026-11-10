@@ -40,20 +40,15 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        fieldFactories.put("Right Triangle", () -> {
-            FieldPane p = new RightTriPane();
-            return p;
-        });
-
-        fieldFactories.put("Isosoles Triangle", () -> {
-            FieldPane p = new IsoTriPane();
-            return p;
-        });
-
-        fieldFactories.put("Equilateral Triangle", () -> {
-            FieldPane p = new EqualTriPane();
-            return p;
-        });
+        fieldFactories.put("Right Triangle", () -> new RightTriPane());
+        fieldFactories.put("Isosoles Triangle", () -> new IsoTriPane());
+        fieldFactories.put("Equilateral Triangle", () -> new EqualTriPane());
+        fieldFactories.put("Circle", () -> new CirclePane());
+        fieldFactories.put("Square", () -> new SquarePane());
+        fieldFactories.put("Rectangle", () -> new RectanglePane());
+        fieldFactories.put("Sphere", () -> new SpherePane());
+        fieldFactories.put("Cube", () -> new CubePane());
+        fieldFactories.put("Cylinder", () -> new CylinderPane());
 
         cboShapes.getItems().addAll(fieldFactories.keySet());
         cboShapes.setPromptText("Choose a shape");

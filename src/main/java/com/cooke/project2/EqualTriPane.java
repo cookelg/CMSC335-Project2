@@ -17,7 +17,7 @@ public class EqualTriPane extends FieldPane {
     @Override
     public void initializeDrawButton(Group group) {
         tfSide.setTextFormatter(new TextFormatter<String>(change -> {
-            if (change.getControlNewText().matches("-?\\d*(\\.\\d*)?")) {
+            if (change.getControlNewText().matches("\\d*(\\.\\d*)?")) {
                 return change;
             }
             return null;
