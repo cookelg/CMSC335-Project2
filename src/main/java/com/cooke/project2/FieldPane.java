@@ -1,8 +1,9 @@
 /*
  * File name: FieldPane.java
- * Date:
+ * Date: 10 November 2026
  * Author: Lawrence Cooke
- * Purpose:
+ * Purpose: Abstract class that initializes the Draw button and the Color picker 
+ * Combo Box
  */
 
 package com.cooke.project2;
@@ -19,6 +20,11 @@ import javafx.scene.paint.Color;
 abstract class FieldPane extends GridPane implements ButtonInitializer {
 
     Button btDraw = new Button("Draw");
+    // The supplier will initialize the Color Enum only once it is retrieved from
+    // the
+    // event handler after the button is pressed. A map with String keys are used to
+    // Display the options in the combo box and to retrieve the appropriate
+    // initializer.
     Map<String, Supplier<Color>> colorFactories = new LinkedHashMap<>();
     ComboBox<String> cboColors = new ComboBox<>();
 

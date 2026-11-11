@@ -1,8 +1,13 @@
 /*
  * File name: App.java
- * Date:
+ * Date: 10 November 2026
  * Author: Lawrence Cooke
- * Purpose:
+ * Purpose: Contains the JavaFX application. The input fields will change according
+ * to the shape selected from the ComboBox at the top of the window. Each shape 
+ * initializes a custom pane for each shape type. All shapes will be drawn in a 3D 
+ * space with a perspective camera. The user can zoom in and out with the mouse wheel, 
+ * and can rotate the object by clicking-and-dragging. The perspective camera will 
+ * remain in the same orientation when switching to another shape. 
  */
 
 package com.cooke.project2;
@@ -115,6 +120,9 @@ public class App extends Application {
         launch(args);
     }
 
+    // Initialize all mouse controls to zoom and rotate the camera.
+    // source: Genuine Coder (YouTube Channel) JavaFX 3D Tutorial #5
+    // https://youtu.be/yinIKzg7duc?si=ZcgmwWQJxbzTJ4mn
     private void initMouseControl(Group group, SubScene subScene, Stage stage) {
         Rotate xRotate;
         Rotate yRotate;

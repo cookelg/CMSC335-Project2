@@ -1,8 +1,9 @@
 /*
  * File name: ButtonInitializer.java
- * Date:
+ * Date: 10 November 2026
  * Author: Lawrence Cooke
- * Purpose:
+ * Purpose: Interface used to guaruntee each pane will initilize the draw button
+ * according to its corresponding shape
  */
 
 package com.cooke.project2;

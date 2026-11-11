@@ -1,8 +1,10 @@
 /*
  * File name: RectanglePane.java
- * Date:
+ * Date: 10 November 2026
  * Author: Lawrence Cooke
- * Purpose:
+ * Purpose: A Pane with the draw button initialized to create a Rectangle. When the user presses 
+ * the draw button, all inputs are checked. If errors exist, a popup window will display with
+ * the appropriate error message
  */
 
 package com.cooke.project2;

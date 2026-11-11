@@ -1,8 +1,9 @@
 /*
  * File name: Triangle.java
- * Date:
+ * Date: 10 November 2026
  * Author: Lawrence Cooke
- * Purpose:
+ * Purpose: Triangle class used to compute the vertices of a triangle, then initialize 
+ * the triangle according to the calulated points.
  */
 
 package com.cooke.project2;
@@ -11,6 +12,7 @@ import javafx.scene.shape.Polygon;
 
 public class Triangle extends Polygon {
 
+    // method to calculate an Isosceles Triangle using a base and height argument
     public void setIsosceles(double base, double height) {
 
         double half = base / 2.0;
@@ -23,6 +25,8 @@ public class Triangle extends Polygon {
         this.getPoints().setAll(ptsXY);
     }
 
+    // method to calculate a Right Triangle using 'a' side and 'b' side of a right
+    // triangle
     public void setRight(double side1, double side2) {
 
         Double[] ptsXY = new Double[] {
@@ -33,6 +37,7 @@ public class Triangle extends Polygon {
         this.getPoints().setAll(ptsXY);
     }
 
+    // method to calculate an Equilateral Triangle of same length sides.
     public void setEquilateral(double side) {
 
         double half = side / 2.0;
